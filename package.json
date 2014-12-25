@@ -1,0 +1,25 @@
+{
+  "name": "angular-material-firebase-seed",
+  "version": "0.0.0",
+  "description": "angularjs, angular-material and firebase setup",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oshko/angular-material-firebase-seed"
+  },
+  "author": "oshko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oshko/angular-material-firebase-seed/issues"
+  },
+  "homepage": "https://github.com/oshko/angular-material-firebase-seed",
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-livereload": "^3.0.2",
+    "gulp-watch": "^3.0.0"
+  }
+}

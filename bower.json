@@ -1,0 +1,34 @@
+{
+  "name": "angular-material-firebase-seed",
+  "version": "0.0.0",
+  "homepage": "https://github.com/oshko/angular-material-firebase-seed",
+  "authors": [
+    "oshko <oshko.mail@gmail.com>"
+  ],
+  "dependencies": {
+    "angular": "1.3.x",
+    "angular-animate": "1.3.x",
+    "angular-aria": "1.3.x",
+    "hammerjs": "~2.0.2",
+    "angularfire": "~0.9.0",
+    "firebase": "~2.0.6",
+    "angular-material": "~0.6.1",
+    "material-design-icons": "~1.0.1"
+  },
+  "devDependencies": {
+    "angular": "1.3.x",
+    "angular-animate": "1.3.x",
+    "angular-aria": "1.3.x",
+    "angular-route": "1.3.x",
+    "angular-mocks": "1.3.x",
+    "angularytics": "^0.3.0"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
