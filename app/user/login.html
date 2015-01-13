@@ -1,4 +1,4 @@
-<md-dialog aria-label="login">
+<md-dialog aria-label="login" ng-controller="loginDialogCtrl">
     <md-toolbar class="md-theme-light">
         <h1 class="md-toolbar-tools">
             <span>Sign in dailog</span>
@@ -15,17 +15,18 @@
             </form>
             <section layout="column" style="padding: 20px;" flex layout-align="center">
                 <p>Or you can use your Facebook account</p>
-                <md-button>Facebook</md-button>
+                <md-button ng-click="oauthLogin('facebook')">Facebook</md-button>
             </section>
         </section>
 
     </md-content>
     <div class="md-actions" layout="row">
-        <span flex></span>
-        <md-button ng-click="answer('not useful')">
+        <span>{{ userData }}</span>
+        <span flex> Here is {{ dataFromFirebase.$value }}</span>
+        <md-button ng-click="cancel()">
             Close
         </md-button>
-        <md-button ng-click="answer('useful')" class="md-primary">
+        <md-button ng-click="login(user.email, user.password)">
             Sign in
         </md-button>
     </div>

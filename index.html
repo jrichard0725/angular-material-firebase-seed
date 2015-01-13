@@ -11,62 +11,77 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
 
     <!--Your custom CSS file links here-->
-    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="app/main/main.css"/>
 
 </head>
-<body ng-app="main" layout="column" layout-align="top-center" >
-    <div ng-controller="AppCtrl" layout="column" layout-fill>
-        <section layout="row" flex>
-            <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
-                <md-toolbar class="md-theme-indigo">
-                    <h1 class="md-toolbar-tools">Sidenav Left</h1>
-                </md-toolbar>
-                <md-content class="md-padding" ng-controller="LeftCtrl">
-                    <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                        Close Sidenav Left
+<body ng-app="mainApp" layout="column" layout-align="top-center">
+<div ng-controller="AppCtrl as mainCtrl" layout="column" layout-fill>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Sidenav Left</h1>
+            </md-toolbar>
+            <md-content class="md-padding" ng-controller="LeftCtrl as DrawerCtrl">
+                <md-button ng-click="DrawerCtrl.close()" class="md-primary" hide-gt-md>
+                    Close Sidenav Left
+                </md-button>
+                <p hide-md show-gt-md>
+                    This sidenav is locked open on your device. To go back to the default behavior,
+                    narrow your display.
+                </p>
+            </md-content>
+        </md-sidenav>
+        <section layout="column" flex>
+            <md-toolbar>
+                <nav class="md-toolbar-tools">
+                    <md-button ng-click="mainCtrl.toggleLeft()" hide-gt-md>
+                        <md-icon style="width: 24px; height: 24px;" icon="bower_components/material-design-icons/navigation/svg/production/ic_menu_24px.svg"></md-icon>
                     </md-button>
-                    <p hide-md show-gt-md>
-                        This sidenav is locked open on your device. To go back to the default behavior,
-                        narrow your display.
-                    </p>
-                </md-content>
-            </md-sidenav>
-            <section layout="column" flex>
-                <md-toolbar>
-                    <nav class="md-toolbar-tools">
-                        <md-button ng-click="toggleLeft()" hide-gt-md>
-                            <md-icon style="width: 24px; height: 24px;" icon="bower_components/material-design-icons/navigation/svg/production/ic_menu_24px.svg"></md-icon>
-                        </md-button>
-                        <span>Title is here</span>
-                        <span flex></span>
-                        <md-button class="md-primary" ng-click="showLoginDailog($event)" aria-label="Sign-in">
-                            <span class="md-button">Sign-in</span>
-                        </md-button>
-                    </nav>
+                    <span>Title is here</span>
+                    <span flex></span>
+                    <img ng-show="mainCtrl.user.info!==null" class="profileImage" ng-src="{{mainCtrl.user.info.facebook.cachedUserProfile.picture.data.url}}"/>
+                    <span ng-show="mainCtrl.user.info!==null" class="profileName">{{mainCtrl.user.info.facebook.cachedUserProfile.first_name}}</span>
 
-                </md-toolbar>
-                <md-content flex class="md-padding">
-                    <section layout="column" layout-fill layout-align="center center">
 
-                        <p>
-                            The left sidenav will 'lock open' on a medium (>=960px wide) device.
-                        </p>
+                    <!--Sign out button only show when user authenticated.-->
+                    <md-button ng-show="mainCtrl.user.info!==null" class="md-primary" ng-click="mainCtrl.signOut()" aria-label="Sign-in">
+                        <span class="md-button">Sign out</span>
+                    </md-button>
 
-                    </section>
-                </md-content>
-                <b layout="row" layout-align="center center" layout-margin>
-                    {{alert}}
-                </b>
-            </section>
+                    <!--Sign in button with dialog box hidden when user authenticated-->
+                    <md-button ng-show="mainCtrl.user.info===null" class="md-primary" ng-click="mainCtrl.showLoginDailog($event)" aria-label="Sign-in">
+                        <span class="md-button">Sign-in</span>
+                    </md-button>
 
+                </nav>
+
+            </md-toolbar>
+            <md-content flex class="md-padding">
+                <section layout="column" layout-fill class="doc-content">
+                    <div ng-view></div>
+
+                </section>
+            </md-content>
+            <b layout="row" layout-align="center center" layout-margin>
+                {{alert}}
+            </b>
         </section>
-    </div>
+
+    </section>
+</div>
+
+<!--Basic Angular Dependencies-->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
 
 <!-- Angular Material Dependencies -->
-<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/hammerjs/hammer.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
+
+<!--Firebase and Angularfire Dependencies-->
+<script src="bower_components/firebase/firebase.js"></script>
+<script src="bower_components/angularfire/dist/angularfire.js"></script>
 
 
 
@@ -75,7 +90,24 @@
 
 
 <!--Here is custom javavscript file links-->
-<script src="javascript/main.js"></script>
+<script src="app/main/main-module.js"></script>
+<script src="app/config/config.js"></script>
+<script src="app/main/main-controllers.js"></script>
+<script src="app/util/decorators.js"></script>
+<!--<script src="app/util/directives.js"></script>-->
+<script src="app/util/filters.js"></script>
+<script src="app/routes/routes.js"></script>
+<script src="app/util/services.js"></script>
+<script src="app/util/firebase.utils.js"></script>
+<script src="app/util/changeEmail.js"></script>
+
+<!--home page dependencies-->
+<script src="app/home/homeController.js"></script>
+<!--user control dependencies-->
+<script src="app/user/user-module.js"></script>
+<script src="app/user/user-factories.js"></script>
+<script src="app/user/user-controllers.js"></script>
+<script src="app/user/account/AccountCtrl.js"></script>
 
 </body>
 </html>

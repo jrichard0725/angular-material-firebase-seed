@@ -1,0 +1,25 @@
+body {
+    font-family: RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+.profileImage {
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    width: 38px;
+    margin: 16px;
+}
+
+.profileName {
+    font-size: 0.7em;
+
+}
+.doc-content {
+    max-width: 864px;
+    margin: auto;
+}
+md-card {
+    min-height: 300px;
+    min-width: 400px;
+    float: left;
+    overflow: auto;
+}
